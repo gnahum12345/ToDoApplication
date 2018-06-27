@@ -5,7 +5,7 @@ ToDoApp is an android app that allows building a todo list and basic todo items 
 
 Submitted by: Gabriel Nahum
 
-Time spent: **X** hours spent in total #tbd
+Time spent: **3** hours spent in total 
 
 ## User Stories
 
@@ -30,7 +30,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+![Walkthrough](https://github.com/gnahum12345/ToDoApplication/blobl/master/ToDo%20Demo.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 

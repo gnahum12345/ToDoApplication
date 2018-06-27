@@ -2,10 +2,11 @@ package me.gnahum12345.todoapplication;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.TransitionDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,7 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-
+import com.transitionseverywhere.*;
 public class MainActivity extends AppCompatActivity {
 
     public final static int EDIT_REQUEST_CODE = 20;
@@ -48,9 +49,9 @@ public class MainActivity extends AppCompatActivity {
         lvItems.setAdapter(itemsAdapter);
 
         setupListViewListener();
-
-
     }
+
+
 
     public void onAddItem(View v) {
         // Obtaining the reference to the Edit Text in the layout
@@ -77,7 +78,13 @@ public class MainActivity extends AppCompatActivity {
         lvItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int i, long l) {
+                // Animate the background color of clicked item
+                ColorDrawable [] color = { new ColorDrawable(Color.parseColor("#000000")), new ColorDrawable(Color.parseColor("#FFFFFF"))};
+                TransitionDrawable trans = new TransitionDrawable(color);
+                view.setBackground(trans);
+                trans.startTransition(2000); // 2 seconds
                 //remove the item.
+
                 items.remove(i);
                 //notify the adapter that the underlying dataset changed.
                 itemsAdapter.notifyDataSetChanged();
@@ -151,5 +158,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+
 }
 

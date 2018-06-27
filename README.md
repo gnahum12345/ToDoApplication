@@ -17,11 +17,14 @@ The following **required** functionality is completed:
 
 The following **optional** features are implemented:
 
-* [ ] User can **tap a todo item in the list and bring up an edit screen for the todo item** and then have any changes to the text reflected in the todo list
+* [x] User can **tap a todo item in the list and bring up an edit screen for the todo item** and then have any changes to the text reflected in the todo list
 
 The following **additional** features are implemented:
 
-* [ ] List anything else that you can get done to improve the app functionality!
+* [x] User can't add an empty task. 
+* [ ] User has the background change green when a task is completed 
+* [ ] User can edit a description from Main Activity
+* [ ] Animation from one view to another. 
 
 ## Video Walkthrough
 
@@ -37,10 +40,11 @@ Describe any challenges encountered while building the app.
 
 1. Understanding what the ArrayAdapter is 
 2. How FileUtils works
-
+3. Animation from listview 
+4. Transition animation. 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright [2018] [Gabriel Nahum]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

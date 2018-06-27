@@ -1,8 +1,11 @@
 package me.gnahum12345.todoapplication;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,6 +21,11 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    public final static int EDIT_REQUEST_CODE = 20;
+    //key used for passing data between activities;
+    public final static String ITEM_TEXT = "itemText";
+    public final static String ITEM_POSITION = "itemPosition";
 
     //Declaring global variables
     ArrayList<String> items;
@@ -39,10 +47,6 @@ public class MainActivity extends AppCompatActivity {
         //Wiring the adapter to the current view.
         lvItems.setAdapter(itemsAdapter);
 
-        //mock data   IT WORKS
-//        items.add("First item!");
-//        items.add("Second item!");
-
         setupListViewListener();
 
 
@@ -54,6 +58,12 @@ public class MainActivity extends AppCompatActivity {
         // Obtaining the text within the Edit Text
         String itemText = etNewItem.getText().toString();
         //Adding it to the listView
+        if (itemText.equals("")) {
+            Toast t = Toast.makeText(getApplicationContext(), "Empty String is not added", Toast.LENGTH_SHORT);
+            t.setGravity(0, 0,0 );
+            t.show();
+            return;
+        }
         itemsAdapter.add(itemText);
         //update items to file System.
         writeItems();
@@ -79,6 +89,41 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+        lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int index, long l) {
+                //create the new activity
+                Intent editIntent = new Intent(MainActivity.this, EditItemActivity.class);
+                //pass the data being edited
+                editIntent.putExtra(ITEM_TEXT, items.get(index));
+                editIntent.putExtra(ITEM_POSITION, index);
+                //display activity
+                startActivityForResult(editIntent, EDIT_REQUEST_CODE);
+
+            }
+        });
+    }
+
+    //  handle result from edit Activity
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        //if edit activity completed ok
+        if (resultCode == RESULT_OK && requestCode == EDIT_REQUEST_CODE) {
+            // extract the string
+            String updatedItem = data.getExtras().getString(ITEM_TEXT);
+            // extract position
+            int position = data.getExtras().getInt(ITEM_POSITION);
+            // update items.
+            items.set(position, updatedItem);
+            // update the list view
+            itemsAdapter.notifyDataSetChanged();
+            // update the file system.
+            writeItems();
+            // notify the user.
+            Toast.makeText(this, "Item updated successfully", Toast.LENGTH_SHORT).show();
+        }
     }
 
     // Returns the data stored in the file.

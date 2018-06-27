@@ -30,7 +30,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-![Walkthrough](https://github.com/gnahum12345/ToDoApplication/blobl/master/ToDo%20Demo.gif)
+![Walkthrough](https://github.com/gnahum12345/ToDoApplication/blob/master/ToDo%20Demo.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
